@@ -1,0 +1,26 @@
+name: Set PR Title
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  set-title:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Set PR title
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const number = context.payload.pull_request.number;
+            const branch = context.payload.pull_request.head.ref;
+            const title = `!${number}: ${branch}`;
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: number,
+              title: title
+            });
