@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  export-windows:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.6.2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup export templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/* \
+             ~/.local/share/godot/export_templates/
+
+      - name: Export Windows
+        run: |
+          mkdir -p build/windows
+          godot --headless --export-release "Windows Desktop" \
+            build/windows/friendslop.exe
+
+      - name: Zip build
+        run: zip -r build/friendslop-windows.zip build/windows
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/friendslop-windows.zip
