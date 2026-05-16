@@ -1,4 +1,4 @@
-name: CI
+name: GDScript Lint
 
 on:
   pull_request:
@@ -19,4 +19,4 @@ jobs:
         run: pip install gdtoolkit
 
       - name: Lint GDScript
-        run: gdlint res://scripts
+        run: gdlint scripts/
