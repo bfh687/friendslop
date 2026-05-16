@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ccofaby0buagl"]
+
+[ext_resource type="Script" uid="uid://b863jpln1nlcg" path="res://scenes/main_menu.gd" id="1_l6cm7"]
+
+[node name="MainMenu" type="Control" unique_id=1074087257]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_l6cm7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=308798330]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LobbyTitle" type="Label" parent="VBoxContainer" unique_id=1629806558]
+layout_mode = 2
+text = "Steam Multiplayer Demo"
+
+[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=557806534]
+layout_mode = 2
+text = "Host"
+
+[node name="LobbyInput" type="LineEdit" parent="VBoxContainer" unique_id=537260970]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Lobby ID"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer" unique_id=312702237]
+layout_mode = 2
+text = "Join
+"
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer" unique_id=1419281885]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

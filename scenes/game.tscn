@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cw38iuv1tne2w"]
+
+[ext_resource type="Script" uid="uid://c1r3agsu8l60m" path="res://scenes/game.gd" id="1_uwrxv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uwrxv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwrxv"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_uwrxv"]
+
+[sub_resource type="Sky" id="Sky_yqjtg"]
+sky_material = SubResource("PhysicalSkyMaterial_uwrxv")
+
+[sub_resource type="Environment" id="Environment_lnu2h"]
+background_mode = 2
+sky = SubResource("Sky_yqjtg")
+
+[node name="Game" type="Node3D" unique_id=908587236]
+script = ExtResource("1_uwrxv")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1694909553]
+_spawnable_scenes = PackedStringArray("uid://cli0twwoyuyfw")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node3D" parent="." unique_id=404626406]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1679727557]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=2029939973]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_uwrxv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1843069734]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_uwrxv")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=601626399]
+transform = Transform3D(1, 0, 0, 0, 0.65652, 0.7543087, 0, -0.7543087, 0.65652, 0, 17.401838, 25.407312)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1778706328]
+environment = SubResource("Environment_lnu2h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2052752478]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.8990904, 0)
+light_energy = 3.0
