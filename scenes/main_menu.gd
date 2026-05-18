@@ -1,7 +1,7 @@
 extends Control
 
+const lobby_scene = "res://scenes/game.tscn"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SteamManager.lobby_created.connect(_on_lobby_created)
 	SteamManager.lobby_joined.connect(_on_lobby_joined)
@@ -19,8 +19,9 @@ func _on_join_button_pressed() -> void:
 	SteamManager.join_lobby(id)
 
 func _on_lobby_created(lobby_id: int) -> void:
-	%StatusLabel.text = "Lobby ID: " + str(lobby_id)
-	Engine.get_main_loop().change_scene_to_file("res://scenes/game.tscn")
+	%StatusLabel.text = "Lobby ID: " + str(lobby_id) 
+	# may not want to automatically swap scenes
+	Engine.get_main_loop().change_scene_to_file(lobby_scene)
 
 func _on_lobby_joined(_lobby_id: int) -> void:
-	Engine.get_main_loop().change_scene_to_file("res://scenes/game.tscn")
+	Engine.get_main_loop().change_scene_to_file(lobby_scene)

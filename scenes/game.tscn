@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://cw38iuv1tne2w"]
 
 [ext_resource type="Script" uid="uid://c1r3agsu8l60m" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://addons/prototype_mini_bundle/M_prototype_dark.tres" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://addons/prototype_mini_bundle/prop_cube.tscn" id="3_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://c5hkhu8upxsf7" path="res://addons/prototype_mini_bundle/prop_cylinder.tscn" id="4_gee14"]
+[ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://addons/prototype_mini_bundle/prop_prism.tscn" id="5_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://dxvxy65pv5hoe" path="res://addons/prototype_mini_bundle/prop_sphere.tscn" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/prototype_mini_bundle/prop_torus.tscn" id="7_kvpfn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uwrxv"]
 
@@ -29,6 +35,7 @@ spawn_path = NodePath("../Players")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=2029939973]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+material_override = ExtResource("2_yqjtg")
 mesh = SubResource("PlaneMesh_uwrxv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1843069734]
@@ -42,5 +49,44 @@ transform = Transform3D(1, 0, 0, 0, 0.65652, 0.7543087, 0, -0.7543087, 0.65652, 
 environment = SubResource("Environment_lnu2h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2052752478]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.8990904, 0)
+transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, -0.49999997, 0.49999997, 0, 0.8990904, 0)
 light_energy = 3.0
+shadow_enabled = true
+
+[node name="PropCube" parent="." unique_id=270642052 instance=ExtResource("3_u5sy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.573698, 0.5099983, -2.4450412)
+
+[node name="PropCylinder" parent="." unique_id=798896283 instance=ExtResource("4_gee14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51108, 1.0100002, -0.8958483)
+
+[node name="PropPrism" parent="." unique_id=1116160044 instance=ExtResource("5_0tnpc")]
+transform = Transform3D(0.9659032, 0, -0.25890332, 0, 1, 0, 0.25890332, 0, 0.9659032, -1.9534607, 0.5099964, -4.7622004)
+
+[node name="PropSphere" parent="." unique_id=308805805 instance=ExtResource("6_vtaks")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5.3172398, 0.5099983, -5.8465576)
+
+[node name="PropTorus" parent="." unique_id=779720659 instance=ExtResource("7_kvpfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.354344, 0.26, 0.48792362)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=51891557]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=45984216]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=74745023]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ReadyButton" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=737429132]
+layout_mode = 2
+text = "Ready"
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=289151234]
+layout_mode = 2
+text = "0/? Ready"
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]

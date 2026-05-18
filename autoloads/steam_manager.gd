@@ -5,7 +5,7 @@ signal lobby_joined(lobby_id)
 
 var steam_id: int = 0
 var lobby_id: int  = 0
-var use_steam: bool = true
+var use_steam: bool = false
 
 func _ready() -> void:
 	var init = Steam.steamInitEx(480, true)
